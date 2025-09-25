@@ -4,12 +4,15 @@
 #include "list.h"
 
 /*
-   Print List
+   IMPRIMIR LISTA
+
+   MODIFICAR PARA CHAR
 */
 
 static void print_list (const List *list) {
     ListNode *node;
-    int *data, i;
+    char *data;
+    int i;
 
     fprintf(stdout, "List size is %d\n", list_size(list));
 
@@ -18,7 +21,7 @@ static void print_list (const List *list) {
 
     while (1) {
         data = list_data(node);
-        fprintf(stdout, "list.node[%03d]=%03d, %p -> %p \n", i, *data, node, node->next);
+        fprintf(stdout, "list.node[%03d]=%s, %p -> %p \n", i, data, node, node->next);
 
         i++;
 
@@ -32,20 +35,23 @@ static void print_list (const List *list) {
 }
 
 
+ //MAIN
+
 int main (int argc, char **argv) {
     List list;
     ListNode *node;
 
-    int *data, i;
+    char *data;
+    int i; //CAMBIAR POR CHAR
 
-    // Initialize the linked list
+    // INICIALIZAR LA LISTA
     list_init(&list, free);
 
-    // Fill the linked list
+    // LLENA LA LISTA CON MALLOC
     node = list_head(&list);
-    for (i = 10; i > 0; i--) {
+    for (i = 27; i > 0; i--) {
 
-        if ((data = (int *)malloc(sizeof(int))) == NULL)
+        if ((data = (char *)malloc(sizeof(char))) == NULL)
             return 1;
 
         *data = i;
@@ -56,7 +62,9 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    node = list_head(&list);
+    //CREACION DEL PRIMER NODO
+
+    node = list_head(&list); //list head ESTA EN EL .h
 
     for (i = 0; i < 7; ++i)
         node = list_next(node);
@@ -69,8 +77,8 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    fprintf(stdout, "\nInserting 187 at the tail of the list\n");
-    *data = 187;
+    fprintf(stdout, "\nInserting z at the tail of the list\n");
+    *data = 'z';
     if (list_ins_next(&list, list_tail(&list), data) != 0)
         return 1;
 
@@ -84,13 +92,13 @@ int main (int argc, char **argv) {
     fprintf(stdout, "\nRemoving a node at the head of the list\n");
     if (list_rem_next(&list, NULL, (void**)&data) != 0)
         return 1;
-    print_list(&list);    
-    
-    fprintf(stdout, "\nInsert 975 at the head of the list\n");
-    *data = 975;
+    print_list(&list);
+
+    fprintf(stdout, "\nInsert a at the head of the list\n");
+    *data = 'a';
     if (list_ins_next(&list, NULL, data) != 0)
         return 1;
-    print_list(&list);    
+    print_list(&list);
 
     fprintf(stdout, "\nIterating and removing the fourth node\n");
 
@@ -103,8 +111,8 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    fprintf(stdout, "\nInserting 607 after the first node\n");
-    *data = 607;
+    fprintf(stdout, "\nInserting b after the first node\n");
+    *data = 'b';
     if (list_ins_next(&list, list_head(&list), data) != 0)
         return 1;
     print_list(&list);
@@ -117,11 +125,12 @@ int main (int argc, char **argv) {
     fprintf(stdout, "Testing list_is_tail... value=%d (1=OK)\n", i);
     i = list_is_tail(list_head(&list));
     fprintf(stdout, "Testing list_is_tail... value=%d (1=OK)\n", i);
-    
+
 
     // Destroying the list
     fprintf(stdout, "\nDestroying the list\n");
     list_destroy(&list);
 
     return 0;
+}
 }
