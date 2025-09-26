@@ -77,7 +77,7 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    fprintf(stdout, "\nInserting z at the tail of the list\n");
+    fprintf(stdout, "\nInserting (z) at the tail of the list\n");
     *data = 'z';
     if (list_ins_next(&list, list_tail(&list), data) != 0)
         return 1;
@@ -94,7 +94,7 @@ int main (int argc, char **argv) {
         return 1;
     print_list(&list);
 
-    fprintf(stdout, "\nInsert a at the head of the list\n");
+    fprintf(stdout, "\nInsert (a) at the head of the list\n");
     *data = 'a';
     if (list_ins_next(&list, NULL, data) != 0)
         return 1;
@@ -111,11 +111,33 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    fprintf(stdout, "\nInserting b after the first node\n");
+    fprintf(stdout, "\nInserting (b) after the first node\n");
     *data = 'b';
     if (list_ins_next(&list, list_head(&list), data) != 0)
         return 1;
     print_list(&list);
+
+   int j;
+   char abecedario[23]={'c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y'};
+   
+   for(i=0;i<=23;i++){
+       
+       node = list_head(&list);
+        node = list_next(node);
+        //a y b ya estan agregados
+        
+       for(j=0;j<=i;j++){
+       node = list_next(node);
+        }
+        
+            *data = abecedario[i];
+    if (list_ins_next(&list, node, data) != 0)
+        return 1;
+    print_list(&list);
+    
+        
+   }
+   
 
     i = list_is_head(&list, list_head(&list));
     fprintf(stdout, "\nTesting list_is_head... value=%d (1=OK)\n", i);
