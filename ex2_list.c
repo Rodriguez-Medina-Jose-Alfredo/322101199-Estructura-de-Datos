@@ -77,7 +77,7 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    fprintf(stdout, "\nInserting z at the tail of the list\n");
+    fprintf(stdout, "\nInserting (z) at the tail of the list\n");
     *data = 'z';
     if (list_ins_next(&list, list_tail(&list), data) != 0)
         return 1;
@@ -94,7 +94,7 @@ int main (int argc, char **argv) {
         return 1;
     print_list(&list);
 
-    fprintf(stdout, "\nInsert a at the head of the list\n");
+    fprintf(stdout, "\nInsert (a) at the head of the list\n");
     *data = 'a';
     if (list_ins_next(&list, NULL, data) != 0)
         return 1;
@@ -111,9 +111,20 @@ int main (int argc, char **argv) {
 
     print_list(&list);
 
-    fprintf(stdout, "\nInserting b after the first node\n");
+    fprintf(stdout, "\nInserting (b) after the first node\n");
     *data = 'b';
     if (list_ins_next(&list, list_head(&list), data) != 0)
+        return 1;
+    print_list(&list);
+
+   
+   fprintf(stdout, "\nInserting (c) after (b) node\n");
+    node = list_head(&list);
+    node = list_next(node);
+    node = list_next(node);
+   
+    *data = 'c';
+    if (list_ins_next(&list, node, data) != 0)
         return 1;
     print_list(&list);
 
