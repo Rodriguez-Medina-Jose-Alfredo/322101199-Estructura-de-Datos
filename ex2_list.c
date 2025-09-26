@@ -117,16 +117,27 @@ int main (int argc, char **argv) {
         return 1;
     print_list(&list);
 
+   int j;
+   char abecedario[23]={'c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y'};
    
-   fprintf(stdout, "\nInserting (c) after (b) node\n");
-    node = list_head(&list);
-    node = list_next(node);
-    node = list_next(node);
-   
-    *data = 'c';
+   for(i=0;i<=23;i++){
+       
+       node = list_head(&list);
+        node = list_next(node);
+        //a y b ya estan agregados
+        
+       for(j=0;j<=i;j++){
+       node = list_next(node);
+        }
+        
+            *data = abecedario[i];
     if (list_ins_next(&list, node, data) != 0)
         return 1;
     print_list(&list);
+    
+        
+   }
+   
 
     i = list_is_head(&list, list_head(&list));
     fprintf(stdout, "\nTesting list_is_head... value=%d (1=OK)\n", i);
